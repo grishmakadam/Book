@@ -1,0 +1,28 @@
+.d_button{
+    background-color: rgb(216, 5, 29);
+    border: none;
+    border-radius: 2px;
+    padding:8px 15px;
+    color:aliceblue
+}
+
+.d_button:hover{
+    background-color: rgb(241, 31, 56);
+    cursor: pointer;
+}
+
+.e_button{
+    background-color: rgb(1, 109, 14);
+    border: none;
+    border-radius: 2px;
+    padding:8px 15px;
+    color:aliceblue
+
+}
+
+.e_button:hover{
+    background-color: rgb(58, 163, 70);
+    cursor: pointer;
+}
+
+
