@@ -73,7 +73,7 @@ if(!user){
     return user
     }
     else{
-        throw Error("Not Verified")
+        throw Error("Email Not Verified! Please check your inbox")
     }
  }
  else{

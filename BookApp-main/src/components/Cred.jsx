@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Box } from '@mui/system'
 import { TextField } from '@mui/material'
 import { Typography } from '@mui/material'
-import { useParams } from 'react-router-dom'
+import { useParams,useNavigate } from 'react-router-dom'
 import { Button } from '@mui/material'
 import { Snackbar } from '@mui/material';
 import {Alert} from '@mui/material'
@@ -12,7 +12,7 @@ import useSignup from '../hooks/useSignup'
 const Cred = () => {
     const [open, setOpen] = React.useState(false);
 
-  
+  const navigate=useNavigate()
   
     const handleClose = (event, reason) => {
       if (reason === 'clickaway') {
@@ -45,6 +45,22 @@ const Cred = () => {
     }
 
     useEffect(() => {
+
+        if(id!=type){
+            if (id == 'login') {
+                setType('login')
+               
+            }
+            else{
+                setType('signup')
+            }
+            setData({
+                name:"",
+                email: "",
+                password: ''
+            })
+        }
+        else{
         if (id == 'login') {
             setType('login')
             setError(lerror)
@@ -67,6 +83,7 @@ const Cred = () => {
         if(signerror || lerror){
             setOpen(true)
         }
+    }
         console.log(error)
     }, [id,signerror,lerror]);
 
@@ -89,17 +106,17 @@ const Cred = () => {
 
     const handleType=()=>{
         if(type=="signup"){
-            setType("login")
+            navigate('/user/login')
         }
         else{
-            setType("signup")
+            navigate("/user/signup")
         }
     }
 
     return (
         <div>
 
-            <form onSubmit={submitHandler}>
+           
                 <Box display={"flex"} flexDirection={"column"} maxWidth={400} alignItems="center" justifyContent="center" margin="auto" marginTop={3} marginBottom={3} padding={4} minHeight={500}
                     boxShadow="2px 2px 3px #cccccc" borderRadius={2}
                     sx={{
@@ -107,18 +124,20 @@ const Cred = () => {
                             boxShadow: "10px 10px 10px #cccccc"
                         }, height: '400px'
                     }}>
+                         <form onSubmit={submitHandler}>
                     <Typography style={{ fontSize: "20px", color: "#0047AB" }}>{type == 'login' ? 'Login' : 'Signup'}</Typography>
                     {type == 'signup' && <TextField variant="outlined" label='User Name' type="text" fullWidth margin='normal' value={data.name} name="name" onChange={onChangeData} />}
                     <TextField variant="outlined" label='Email' type="email" fullWidth margin='normal' value={data.email} name="email" onChange={onChangeData} />
                     <TextField variant="outlined" label='Password' type="password" fullWidth margin='normal' value={data.password} name="password" onChange={onChangeData} />
                     {type == 'signup' && <TextField variant="outlined" label='Confirm Password' type="password" fullWidth margin='normal' value={data.confirm} name="confirm" onChange={onChangeData} error={!valid} helperText={!valid && "Password did not match"} />}
                     <Button type="submit" disabled={loading} fullWidth style={{ marginTop: '20px', padding: '10px' }} variant='contained'>{type == 'signup' ? 'Submit' : 'LogIn'}</Button>
+                    </form>
                     <Typography>OR</Typography>
-                    <Button  disabled={loading} fullWidth style={{ marginTop: '20px', padding: '10px' }} variant='contained' onClick={handleType}>{type != 'signup' ? 'SignUp' : 'LogIn'}</Button>
+                    <Button  disabled={loading} type="button"  fullWidth style={{ marginTop: '20px', padding: '10px' }} variant='contained' onClick={handleType}>{type != 'signup' ? 'SignUp' : 'LogIn'}</Button>
 
                 </Box>
 
-            </form>
+           
             {error && <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
   <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
     

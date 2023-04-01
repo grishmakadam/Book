@@ -11,6 +11,7 @@ import Cred from './components/Cred'
 import CropImage from './components/CropImage'
 import ProfilePic from './components/avatar/ProfilePic'
 import DoughnutChart from './components/utils/DoughnutChart'
+import Display from './components/Display'
 function App() {
 
 const {user}=useContext(AuthContext)
@@ -24,6 +25,7 @@ console.log(user)
        {user && <Header/> }
       
       <Routes>
+        <Route path="/verification-mail" element={<Display/>}/>
       <Route path="/profile" element={user?<Profile/>:<Navigate to="/user/login"/>}></Route>
       <Route path="/user/:id" element={!user?<Cred/>:<Navigate to="/"/>}></Route>
       <Route path="/avatar" element={<ProfilePic/>}></Route>

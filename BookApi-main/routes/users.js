@@ -66,8 +66,8 @@ const sendVerificationEmail = ({ _id, email }, res) => {
                         }
                     ).catch((e) => {
                         res.json({
-                            status: "SUCCESS",
-                            message: "Sending Verification email failed"
+                            status: "FAILED",
+                            error: "Sending Verification email failed"
                         })
                     })
                 }
@@ -75,7 +75,7 @@ const sendVerificationEmail = ({ _id, email }, res) => {
                 () => {
                     res.json({
                         status: 'FAILED',
-                        message: 'Couldnt save verification detail!'
+                        error: 'Couldnt save verification detail!'
                     })
                 }
             )
@@ -83,7 +83,7 @@ const sendVerificationEmail = ({ _id, email }, res) => {
     ).catch(() => {
         res.json({
             status: 'FAILED',
-            message: 'An error occurred while hashing email data!'
+            error: 'An error occurred while hashing email data!'
         })
     })
 

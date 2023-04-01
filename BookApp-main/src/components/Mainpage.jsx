@@ -200,15 +200,4 @@ export default function Mainpage() {
     </div>
   );
 }
-      </FormControl>
-      <DataGrid
-        rows={data}
-        columns={columns}
-        pageSize={6}
-        rowsPerPageOptions={[5]}
-        style={{ width: '100%' }}
-        getRowId={(row) => row._id}
-      />
-    </div>
-  );
-}
+     
